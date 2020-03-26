@@ -21,6 +21,7 @@
  * @copyright  2020 Enovation
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+require_once(__DIR__ . '/../../../../../repository/url/locallib.php');
 
 defined('MOODLE_INTERNAL') || die();
 
