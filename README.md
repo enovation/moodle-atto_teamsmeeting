@@ -1,7 +1,7 @@
 # An Atto plugin to create Microsoft Teams meeting and imports meeting link
 
 ## Description
-[https://github.com/OfficeDev/msteams-app-lms-meetings#frequently-asked-questions Microsoft Meetings application] integrated into Atto editor plugin which allows to create meeting and automatically add meeting link into Atto editor field content.
+(Microsoft Meetings application)[https://github.com/OfficeDev/msteams-app-lms-meetings#frequently-asked-questions] integrated into Atto editor plugin which allows to create meeting and automatically add meeting link into Atto editor field content.
 
 ## Installation
 * Download the plugin and extract into lib/editor/atto/plugins/teamsmeeting.
