@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Atto text editor integration version file.
+ * Atto text editor integration lib file.
  *
  * @package    atto_teamsmeeting
  * @copyright  2020 Enovation
@@ -33,10 +33,11 @@ defined('MOODLE_INTERNAL') || die();
  * @param stdClass $fpoptions - unused.
  */
 function atto_teamsmeeting_params_for_js($elementid, $options, $fpoptions) {
-    global $CFG;
+    global $CFG, $USER;
     $params = [
         'clientdomain' => encode_url($CFG->wwwroot),
         'appurl' => get_config('atto_teamsmeeting', 'meetingapplink'),
+        'locale' => $USER->lang
     ];
     return $params;
 }

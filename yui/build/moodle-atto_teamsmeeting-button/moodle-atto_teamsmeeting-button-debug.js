@@ -47,12 +47,12 @@ var COMPONENTNAME = 'atto_teamsmeeting',
                     '<label class="meeting-app-label" for="meetingapp">' +
                     '{{get_string "createteamsmeeting" component}}' +
                     '</label>' +
-                    '<iframe id="meetingapp" src="{{appurl}}?url={{clientdomain}}"></iframe>' +
+                    '<iframe id="meetingapp" src="{{appurl}}?url={{clientdomain}}&locale={{locale}}"></iframe>' +
                 '</div>' +
                 '<div class="mb-1">' +
                     '<label for="{{elementid}}_atto_teamsmeeting_urlentry">{{get_string "meetingurl" component}}</label>' +
                     '<input class="form-control fullwidth url {{CSS.URLINPUT}}" type="url" ' +
-                    'id="{{elementid}}_atto_teamsmeeting_urlentry" size="32"/>' +
+                    'id="{{elementid}}_atto_teamsmeeting_urlentry" size="32" disabled="disabled"/>' +
                 '</div>' +
                 '<div class="form-check">' +
                     '<input type="checkbox" class="form-check-input newwindow" id="{{elementid}}_{{CSS.NEWWINDOW}}"/>' +
@@ -104,9 +104,19 @@ Y.namespace('M.atto_teamsmeeting').Button = Y.Base.create('button', Y.M.editor_a
      */
     _appurl: null,
 
+    /**
+     * Moodle user language to pass for Meetings app.
+     *
+     * @param _locale
+     * @type String
+     * @private
+     */
+    _locale: null,
+
     initializer: function() {
         this._clientdomain = this.get('clientdomain');
         this._appurl = this.get('appurl');
+        this._locale = this.get('locale');
         // Add the teamsmeeting button first.
         this.addButton({
             icon: 'icon',
@@ -173,6 +183,19 @@ Y.namespace('M.atto_teamsmeeting').Button = Y.Base.create('button', Y.M.editor_a
             target = anchornode.getAttribute('target');
             if (url !== '') {
                 this._content.one('.url').setAttribute('value', url);
+                // Make an ajax request to db for links.
+                var ajaxurl = M.cfg.wwwroot + '/lib/editor/atto/plugins/teamsmeeting/ajax.php';
+                var params = {
+                    url: url
+                };
+                Y.io(ajaxurl, {
+                    context: this,
+                    data: params,
+                    timeout: 500,
+                    on: {
+                        complete: this._updateIframe
+                    }
+                });
             }
             if (target === '_blank') {
                 this._content.one('.newwindow').setAttribute('checked', 'checked');
@@ -183,7 +206,7 @@ Y.namespace('M.atto_teamsmeeting').Button = Y.Base.create('button', Y.M.editor_a
     },
 
     /**
-     * The teamsmeeting iframe check.
+     * The teamsmeeting iframe check to get meeting link.
      *
      * @method _meetingCheck
      * @param {EventFacade} e
@@ -200,6 +223,33 @@ Y.namespace('M.atto_teamsmeeting').Button = Y.Base.create('button', Y.M.editor_a
         }
     },
 
+    /**
+     * The teamsmeeting iframe update.
+     *
+     * @method _meetingCheck
+     * @param {String} id
+     * @param {EventFacade} e
+     * @private
+     */
+    _updateIframe:  function(id, data) {
+        if (data.status === 200) {
+            var dataobject = JSON.parse(data.responseText);
+            if (dataobject[2] !== null) {
+                var url = dataobject[0]+'?title=' + dataobject[1] + '&link=' + encodeURIComponent(dataobject[2]) +
+                    '&options=' + encodeURIComponent(dataobject[3]);
+                this._content.one('#meetingapp').set('src', url);
+            }
+        }
+    },
+
+    /**
+     * Gets parameter from url.
+     *
+     * @method _getqueryvariable
+     * @param {string} variable
+     * @param {object} url
+     * @private
+     */
     _getqueryvariable: function(variable, url) {
         var query = url.search.substring(1);
         var vars = query.split('&');
@@ -348,6 +398,7 @@ Y.namespace('M.atto_teamsmeeting').Button = Y.Base.create('button', Y.M.editor_a
         this._content = Y.Node.create(template({
             clientdomain: this._clientdomain,
             appurl: this._appurl,
+            locale: this._locale,
             component: COMPONENTNAME,
             CSS: CSS
         }));
@@ -376,6 +427,15 @@ Y.namespace('M.atto_teamsmeeting').Button = Y.Base.create('button', Y.M.editor_a
          * @type String
          */
         appurl: {
+            value: null
+        },
+        /**
+         * User locale.
+         *
+         * @attribute allowedmethods
+         * @type String
+         */
+        locale: {
             value: null
         }
     }

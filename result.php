@@ -26,14 +26,42 @@ require_once(__DIR__ . '/../../../../../config.php');
 
 require_login();
 
-$link = optional_param('link', null, PARAM_URL);
+$meetinglink = optional_param('link', null, PARAM_URL);
 $title = optional_param('title', null, PARAM_TEXT);
+$preview = optional_param('preview', null, PARAM_RAW);
+$optionslink = optional_param('options', null, PARAM_RAW);
+
+
+$meetingoptions = null;
+
+if (!empty($preview)) {
+    $htmlDom = new DOMDocument;
+    @$htmlDom->loadHTML($preview);
+    $links = $htmlDom->getElementsByTagName('a');
+    foreach($links as $link){
+        $href = $link->getAttribute('href');
+        if ($href && strpos($href, 'meetingOptions') !== FALSE) {
+            $meetingoptions = $href;
+            break;
+        }
+    }
+
+    $meetingdata = new stdClass();
+    $meetingdata->title = $title;
+    $meetingdata->link = $meetinglink;
+    $meetingdata->options = $meetingoptions;
+    $meetingdata->timecreated = time();
+    $DB->insert_record('atto_teamsmeeting', $meetingdata);
+} else if(!empty($optionslink)) {
+    $meetingoptions = $optionslink;
+}
 
 $context = context_system::instance();
 $PAGE->set_context($context);
 $PAGE->set_pagelayout('standard');
-$PAGE->set_url(new moodle_url('/lib/editor/atto/plugins/teamsmeeting/result.php', ['link' => $link, 'title' => $title]));
-echo '<div style="display: flex; flex-direction: column; margin-top: 4.3rem;padding: 2rem;">
+$PAGE->set_url(new moodle_url('/lib/editor/atto/plugins/teamsmeeting/result.php', ['link' => $meetinglink, 'title' => $title,
+    'preview' => $preview, 'options' => $optionslink]));
+echo '<div style="display: flex; flex-direction: column; margin-top: 2rem;padding: 2rem;">
     <svg class="meetingsuccess" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" style="width:100px; align-self: center;
         display: flex; margin-bottom: 1.5rem;">
         <path d="M24 0c2.2 0 4.3.3 6.4.9 2 .6 3.9 1.4 5.7 2.4 1.8 1 3.4 2.3 4.9 3.8 1.5 1.5 2.7 3.1 3.8 4.9 1 1.8 1.8 3.7
@@ -46,7 +74,21 @@ echo '<div style="display: flex; flex-direction: column; margin-top: 4.3rem;padd
         .7-1.6 0-.3-.1-.6-.2-.8-.1-.3-.3-.5-.5-.7s-.4-.4-.7-.5c-.4-.2-.7-.2-1-.2z" fill="#599c00"></path></svg>
         <span class="meetingcreatedheader" style="font-size: 20px; font-weight: 600; display: block; text-align: center;">'.
             get_string('meetingcreatedsuccess', 'atto_teamsmeeting',  $title).
-       '</span>
-    </div>';
+       '</span>';
+if(!empty($meetinglink)) {
+    echo '<span class="meetinglink" style="display: block; text-align: center;"><a class="btn btn-primary" href="'.
+        $meetinglink.'" style="display: inline-block; font-weight: 600; text-align: center; vertical-align: middle;
+        border: 1px solid hsla(0,0%,100%,.04); user-select: none; font-size: .875rem; line-height: 1.5; border-radius: 3px;
+        color: #fff; background-color: #6264a7; margin-top: 1rem; padding: .375rem .75rem; text-decoration: none;" target="_blank">'.
+        get_string('gotomeeting', 'atto_teamsmeeting').'</a></span>';
+}
+if(!empty($meetingoptions)) {
+    echo '<span class="meetingoptions" style="display: block; text-align: center;"><a class="btn btn-primary" href="'.
+        $meetingoptions.'" style="display: inline-block; font-weight: 600; text-align: center; vertical-align: middle;
+        border: 1px solid hsla(0,0%,100%,.04); user-select: none; font-size: .875rem; line-height: 1.5; border-radius: 3px;
+        color: #fff; background-color: #6264a7; margin-top: 1rem; padding: .375rem .75rem; text-decoration: none;" target="_blank">'.
+        get_string('meetingoptions', 'atto_teamsmeeting').'</a></span>';
+}
+echo '</div>';
 
 exit;

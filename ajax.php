@@ -15,22 +15,27 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Strings for component 'atto_teamsmeeting', language 'en'.
+ * Gets data from DB about the meeting
  *
  * @package    atto_teamsmeeting
  * @copyright  2020 Enovation
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-$string['addlink'] = 'Add link';
-$string['createteamsmeeting'] = 'Create Teams meeting';
-$string['gotomeeting'] = 'Go to meeting';
-$string['meetingsapplink'] = 'Meetings App URL';
-$string['meetingsapplink_desc'] = 'This is URL of meeting app location';
-$string['meetingcreatedsuccess'] = 'Meeting "{$a}" was created successfully!';
-$string['meetingoptions'] = 'Meeting Options';
-$string['meetingurl'] = 'Your meeting URL';
-$string['openinnewwindow'] = 'Open in new window';
-$string['pluginname'] = 'Teams Meeting';
-$string['privacy:metadata'] = 'The atto_teamsmeeting plugin does not store any personal data.';
-$string['settings'] = 'Teams Meeting Settings';
+define('AJAX_SCRIPT', true);
+
+require_once(__DIR__ . '/../../../../../config.php');
+
+
+require_login();
+
+$url = required_param('url', PARAM_URL);
+$result = '';
+if (!empty($url)) {
+    $record = $DB->get_record_sql('SELECT * FROM {atto_teamsmeeting} WHERE ' . $DB->sql_compare_text('link') . ' = ' . $DB->sql_compare_text(':url'),
+            array('url' => $url), IGNORE_MISSING);
+    $result = json_encode([$CFG->wwwroot.'/lib/editor/atto/plugins/teamsmeeting/result.php', $record->title, $record->link, $record->options]);
+}
+echo $result;
+die();
+
