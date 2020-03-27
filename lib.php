@@ -33,11 +33,11 @@ defined('MOODLE_INTERNAL') || die();
  * @param stdClass $fpoptions - unused.
  */
 function atto_teamsmeeting_params_for_js($elementid, $options, $fpoptions) {
-    global $CFG, $USER;
+    global $CFG, $SESSION, $USER;
     $params = [
         'clientdomain' => encode_url($CFG->wwwroot),
         'appurl' => get_config('atto_teamsmeeting', 'meetingapplink'),
-        'locale' => $USER->lang
+        'locale' => (empty($SESSION->lang) ? $USER->lang : $SESSION->lang)
     ];
     return $params;
 }
