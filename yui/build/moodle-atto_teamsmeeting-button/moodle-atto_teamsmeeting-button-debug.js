@@ -259,7 +259,6 @@ Y.namespace('M.atto_teamsmeeting').Button = Y.Base.create('button', Y.M.editor_a
                 return decodeURIComponent(pair[1]);
             }
         }
-        console.log('Variable %s not found', variable);
     },
 
     /**

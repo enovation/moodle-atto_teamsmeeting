@@ -21,9 +21,9 @@
  * @copyright  2020 Enovation
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-require_once(__DIR__ . '/../../../../../repository/url/locallib.php');
-
 defined('MOODLE_INTERNAL') || die();
+
+require_once(__DIR__ . '/../../../../../repository/url/locallib.php');
 
 /**
  * Set params for this button.
@@ -44,7 +44,6 @@ function atto_teamsmeeting_params_for_js($elementid, $options, $fpoptions) {
 
 /**
  * Initialise this plugin
- * @param string $elementid
  */
 function atto_teamsmeeting_strings_for_js() {
     global $PAGE;
