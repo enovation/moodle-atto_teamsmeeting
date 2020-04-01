@@ -39,6 +39,12 @@
 
 **NOTICE:** Meeting options are only available for meetings that were created with Atto plugin v1.2 and later.
 
+## Localization (available with Atto plugin v1.2 and later)
+Atto Teams Meeting plugin also enables to use Meetings App locale feature. User language selected in Moodle is passed to Meetings App. At the moment Meetings app supported locales - 'ar', 'bg', 'cs', 'cy', 'da', 'de', 'en-us', 'en-gb', 'es', 'es-mx', 'fi', 'fr', 'fr-ca', 'he', 'is', 'it', 'ja', 'ko', 'nb', 'nl', 'no', 'nn-no', 'pl', 'pt-br', 'pt-pt', 'ru', 'sv', 'th', 'tr', 'zh-cn', 'zh-tw'.
+
+Atto Teams Meeting plugin itself by default supports only 'en' locale. However, Moodle community is adding more translations for the plugin and you can add them yourself. [More details here](https://docs.moodle.org/dev/Translating_plugins).
+
+
 
 ## Hosting Meetings App (optional)
 You can host Microsoft Meetings application yourself. To do this:
