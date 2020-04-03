@@ -11,7 +11,7 @@
 ![Screenshot of the settings](docs/settings.png)
 
 ## Usage Guide
-1. When editing description using the Atto Editor, click on the Microsoft Teams  icon.
+1. When editing description using the Atto Editor type the text which you want to make as meeting link, select it and click on the Microsoft Teams  icon.
 
 ![Screenshot of the toolbar](docs/toolbar.png)
 
