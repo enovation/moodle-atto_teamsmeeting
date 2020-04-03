@@ -314,7 +314,7 @@ Y.namespace('M.atto_teamsmeeting').Button = Y.Base.create('button', Y.M.editor_a
 
         if (this._currentSelection[0].collapsed) {
             // Firefox cannot add teamsmeetings when the selection is empty so we will add it manually.
-            teamsmeeting = Y.Node.create('<a>' + url + '</a>');
+            teamsmeeting = Y.Node.create('<a>' + M.util.get_string('linktext', COMPONENTNAME) + '</a>');
             teamsmeeting.setAttribute('href', url);
 
             // Add the node and select it to replicate the behaviour of execCommand.

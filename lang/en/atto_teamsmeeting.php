@@ -25,6 +25,7 @@
 $string['addlink'] = 'Add link';
 $string['createteamsmeeting'] = 'Create Teams meeting';
 $string['gotomeeting'] = 'Go to meeting';
+$string['linktext'] = 'Join Microsoft Teams Meeting';
 $string['meetingsapplink'] = 'Meetings App URL';
 $string['meetingsapplink_desc'] = 'This is URL of meeting app location';
 $string['meetingcreatedsuccess'] = 'Meeting "{$a}" was created successfully!';

@@ -52,6 +52,7 @@ function atto_teamsmeeting_strings_for_js() {
                                           'addlink',
                                           'createteamsmeeting',
                                           'meetingurl',
+                                          'linktext',
                                           'openinnewwindow'),
                                     'atto_teamsmeeting');
 }
