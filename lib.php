@@ -34,10 +34,14 @@ require_once(__DIR__ . '/../../../../../repository/url/locallib.php');
  */
 function atto_teamsmeeting_params_for_js($elementid, $options, $fpoptions) {
     global $CFG, $SESSION, $USER;
+
+    $lang = empty($SESSION->lang) ? $USER->lang : $SESSION->lang;
+    $parent_lang = get_parent_language($lang);
+
     $params = [
         'clientdomain' => encode_url($CFG->wwwroot),
         'appurl' => get_config('atto_teamsmeeting', 'meetingapplink'),
-        'locale' => (empty($SESSION->lang) ? $USER->lang : $SESSION->lang)
+        'locale' => empty($parent_lang) ? $lang : $parent_lang
     ];
     return $params;
 }
