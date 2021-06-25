@@ -32,5 +32,7 @@ $string['meetingoptions'] = 'Meeting Options';
 $string['meetingurl'] = 'Your meeting URL';
 $string['openinnewwindow'] = 'Open in new window';
 $string['pluginname'] = 'Teams Meeting';
-$string['privacy:metadata'] = 'The atto_teamsmeeting plugin does not store any personal data.';
+$string['privacy:metadata:msteamsapp'] = 'The Atto Teams Meeting plugin does not store any data. However, it sends user
+ language code to Microsoft Teams application to provide user interface based on user language.';
+$string['privacy:metadata:msteamsapp:userlang'] = 'User language code sent to Microsoft Teams application.';
 $string['settings'] = 'Teams Meeting Settings';
