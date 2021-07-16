@@ -47,7 +47,7 @@ var COMPONENTNAME = 'atto_teamsmeeting',
                     '<label class="meeting-app-label" for="meetingapp">' +
                     '{{get_string "createteamsmeeting" component}}' +
                     '</label>' +
-                    '<iframe id="meetingapp" src="{{appurl}}?url={{clientdomain}}&locale={{locale}}"></iframe>' +
+                    '<iframe id="meetingapp" src="{{appurl}}?url={{clientdomain}}&locale={{locale}}&msession={{msession}}"></iframe>' +
                 '</div>' +
                 '<div class="mb-1">' +
                     '<label for="{{elementid}}_atto_teamsmeeting_urlentry">{{get_string "meetingurl" component}}</label>' +
@@ -113,10 +113,20 @@ Y.namespace('M.atto_teamsmeeting').Button = Y.Base.create('button', Y.M.editor_a
      */
     _locale: null,
 
+    /**
+     * Moodle sessionkey to pass for Meetings app.
+     *
+     * @param _msession
+     * @type String
+     * @private
+     */
+    _msession: null,
+
     initializer: function() {
         this._clientdomain = this.get('clientdomain');
         this._appurl = this.get('appurl');
         this._locale = this.get('locale');
+        this._msession = this.get('msession');
         // Add the teamsmeeting button first.
         this.addButton({
             icon: 'icon',
@@ -398,6 +408,7 @@ Y.namespace('M.atto_teamsmeeting').Button = Y.Base.create('button', Y.M.editor_a
             clientdomain: this._clientdomain,
             appurl: this._appurl,
             locale: this._locale,
+            msession: this._msession,
             component: COMPONENTNAME,
             CSS: CSS
         }));
@@ -435,6 +446,15 @@ Y.namespace('M.atto_teamsmeeting').Button = Y.Base.create('button', Y.M.editor_a
          * @type String
          */
         locale: {
+            value: null
+        },
+        /**
+         * User locale.
+         *
+         * @attribute allowedmethods
+         * @type String
+         */
+        msession: {
             value: null
         }
     }
