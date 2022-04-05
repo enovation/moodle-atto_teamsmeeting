@@ -33,12 +33,22 @@ require_once(__DIR__ . '/../../../../../repository/url/locallib.php');
  * @param stdClass $fpoptions - unused.
  */
 function atto_teamsmeeting_params_for_js($elementid, $options, $fpoptions) {
-    global $CFG, $SESSION, $USER;
+    global $CFG, $SESSION, $USER, $COURSE;
+
+    $coursecontext=context_course::instance($COURSE->id);
+    $disabled=false;
+
+    // If user don't have permission don't show button
+    if(!has_capability('atto/teamsmeeting:visible', $coursecontext)) {
+       $disabled=true;
+    }
+
     $params = [
         'clientdomain' => encode_url($CFG->wwwroot),
         'appurl' => get_config('atto_teamsmeeting', 'meetingapplink'),
         'locale' => (empty($SESSION->lang) ? $USER->lang : $SESSION->lang),
-        'msession' => sesskey()
+        'msession' => sesskey(),
+        'disabled' => $disabled
     ];
     return $params;
 }

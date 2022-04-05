@@ -40,29 +40,29 @@ var COMPONENTNAME = 'atto_teamsmeeting',
         URLINPUT: '.atto_teamsmeeting_urlentry'
     },
     TEMPLATE = '' +
-            '<form class="atto_form">' +
-                '<div class="meeting-app">' +
-                    '<label class="meeting-app-label" for="meetingapp">' +
-                    '{{get_string "createteamsmeeting" component}}' +
-                    '</label>' +
-                    '<iframe id="meetingapp" src="{{appurl}}?url={{clientdomain}}&locale={{locale}}&msession={{msession}}"></iframe>' +
-                '</div>' +
-                '<div class="mb-1">' +
-                    '<label for="{{elementid}}_atto_teamsmeeting_urlentry">{{get_string "meetingurl" component}}</label>' +
-                    '<input class="form-control fullwidth url {{CSS.URLINPUT}}" type="url" ' +
-                    'id="{{elementid}}_atto_teamsmeeting_urlentry" size="32" disabled="disabled"/>' +
-                '</div>' +
-                '<div class="form-check">' +
-                    '<input type="checkbox" class="form-check-input newwindow" id="{{elementid}}_{{CSS.NEWWINDOW}}"/>' +
-                    '<label class="form-check-label" for="{{elementid}}_{{CSS.NEWWINDOW}}">' +
-                    '{{get_string "openinnewwindow" component}}' +
-                    '</label>' +
-                '</div>' +
-                '<div class="mdl-align">' +
-                    '<br/>' +
-                    '<button type="submit" class="btn btn-secondary submit">{{get_string "addlink" component}}</button>' +
-                '</div>' +
-            '</form>';
+        '<form class="atto_form">' +
+        '<div class="meeting-app">' +
+        '<label class="meeting-app-label" for="meetingapp">' +
+        '{{get_string "createteamsmeeting" component}}' +
+        '</label>' +
+        '<iframe id="meetingapp" src="{{appurl}}?url={{clientdomain}}&locale={{locale}}&msession={{msession}}"></iframe>' +
+        '</div>' +
+        '<div class="mb-1">' +
+        '<label for="{{elementid}}_atto_teamsmeeting_urlentry">{{get_string "meetingurl" component}}</label>' +
+        '<input class="form-control fullwidth url {{CSS.URLINPUT}}" type="url" ' +
+        'id="{{elementid}}_atto_teamsmeeting_urlentry" size="32" disabled="disabled"/>' +
+        '</div>' +
+        '<div class="form-check">' +
+        '<input type="checkbox" class="form-check-input newwindow" id="{{elementid}}_{{CSS.NEWWINDOW}}"/>' +
+        '<label class="form-check-label" for="{{elementid}}_{{CSS.NEWWINDOW}}">' +
+        '{{get_string "openinnewwindow" component}}' +
+        '</label>' +
+        '</div>' +
+        '<div class="mdl-align">' +
+        '<br/>' +
+        '<button type="submit" class="btn btn-secondary submit">{{get_string "addlink" component}}</button>' +
+        '</div>' +
+        '</form>';
 Y.namespace('M.atto_teamsmeeting').Button = Y.Base.create('button', Y.M.editor_atto.EditorPlugin, [], {
 
     /**
@@ -120,19 +120,25 @@ Y.namespace('M.atto_teamsmeeting').Button = Y.Base.create('button', Y.M.editor_a
      */
     _msession: null,
 
-    initializer: function() {
+    initializer: function () {
         this._clientdomain = this.get('clientdomain');
         this._appurl = this.get('appurl');
         this._locale = this.get('locale');
         this._msession = this.get('msession');
-        // Add the teamsmeeting button first.
-        this.addButton({
-            icon: 'icon',
-            iconComponent: 'atto_teamsmeeting',
-            callback: this._displayDialogue,
-            tags: 'a',
-            tagMatchRequiresAll: false
-        });
+        // If we don't have the capability to view then give up.
+        this._disabled = this.get('disabled');
+        if (this._disabled) {
+            return;
+        } else {
+            // Add the teamsmeeting button first.
+            this.addButton({
+                icon: 'icon',
+                iconComponent: 'atto_teamsmeeting',
+                callback: this._displayDialogue,
+                tags: 'a',
+                tagMatchRequiresAll: false
+            });
+        }
     },
 
     /**
@@ -141,7 +147,7 @@ Y.namespace('M.atto_teamsmeeting').Button = Y.Base.create('button', Y.M.editor_a
      * @method _displayDialogue
      * @private
      */
-    _displayDialogue: function() {
+    _displayDialogue: function () {
         // Store the current selection.
         this._currentSelection = this.get('host').getSelection();
         if (this._currentSelection === false) {
@@ -170,7 +176,7 @@ Y.namespace('M.atto_teamsmeeting').Button = Y.Base.create('button', Y.M.editor_a
      * @method _resolveAnchors
      * @private
      */
-    _resolveAnchors: function() {
+    _resolveAnchors: function () {
         // Find the first anchor tag in the selection.
         var selectednode = this.get('host').getSelectionParentNode(),
             anchornodes,
@@ -220,8 +226,8 @@ Y.namespace('M.atto_teamsmeeting').Button = Y.Base.create('button', Y.M.editor_a
      * @param {EventFacade} e
      * @private
      */
-    _meetingcheck: function() {
-        if(document.getElementById('meetingapp').contentDocument) {
+    _meetingcheck: function () {
+        if (document.getElementById('meetingapp').contentDocument) {
             var url = document.getElementById('meetingapp').contentDocument.location;
             if (url !== '' && url.pathname.indexOf("teamsmeeting") > -1) {
                 var link = this._getqueryvariable('link', url);
@@ -239,11 +245,11 @@ Y.namespace('M.atto_teamsmeeting').Button = Y.Base.create('button', Y.M.editor_a
      * @param {EventFacade} e
      * @private
      */
-    _updateIframe:  function(id, data) {
+    _updateIframe: function (id, data) {
         if (data.status === 200) {
             var dataobject = JSON.parse(data.responseText);
             if (dataobject[2] !== null) {
-                var url = dataobject[0]+'?title=' + dataobject[1] + '&link=' + encodeURIComponent(dataobject[2]) +
+                var url = dataobject[0] + '?title=' + dataobject[1] + '&link=' + encodeURIComponent(dataobject[2]) +
                     '&options=' + encodeURIComponent(dataobject[3]);
                 this._content.one('#meetingapp').set('src', url);
             }
@@ -258,7 +264,7 @@ Y.namespace('M.atto_teamsmeeting').Button = Y.Base.create('button', Y.M.editor_a
      * @param {object} url
      * @private
      */
-    _getqueryvariable: function(variable, url) {
+    _getqueryvariable: function (variable, url) {
         var query = url.search.substring(1);
         var vars = query.split('&');
         for (var i = 0; i < vars.length; i++) {
@@ -276,7 +282,7 @@ Y.namespace('M.atto_teamsmeeting').Button = Y.Base.create('button', Y.M.editor_a
      * @param {EventFacade} e
      * @private
      */
-    _setteamsmeeting: function(e) {
+    _setteamsmeeting: function (e) {
         var input,
             value;
 
@@ -312,7 +318,7 @@ Y.namespace('M.atto_teamsmeeting').Button = Y.Base.create('button', Y.M.editor_a
      * @param  {String} url URL the teamsmeeting will point to.
      * @return {Node} The added Node.
      */
-    _setteamsmeetingOnSelection: function(url) {
+    _setteamsmeetingOnSelection: function (url) {
         var host = this.get('host'),
             teamsmeeting,
             selectednode,
@@ -345,7 +351,7 @@ Y.namespace('M.atto_teamsmeeting').Button = Y.Base.create('button', Y.M.editor_a
 
         anchornodes = this._findSelectedAnchors(Y.one(selectednode));
         // Add new window attributes if requested.
-        Y.Array.each(anchornodes, function(anchornode) {
+        Y.Array.each(anchornodes, function (anchornode) {
             target = this._content.one('.newwindow');
             if (target.get('checked')) {
                 anchornode.setAttribute('target', '_blank');
@@ -365,7 +371,7 @@ Y.namespace('M.atto_teamsmeeting').Button = Y.Base.create('button', Y.M.editor_a
      * @return {Node|Boolean} The Node, or false if not found.
      * @private
      */
-    _findSelectedAnchors: function(node) {
+    _findSelectedAnchors: function (node) {
         var tagname = node.get('tagName'),
             hit, hits;
 
@@ -376,7 +382,7 @@ Y.namespace('M.atto_teamsmeeting').Button = Y.Base.create('button', Y.M.editor_a
 
         // Search down but check that each node is part of the selection.
         hits = [];
-        node.all('a').each(function(n) {
+        node.all('a').each(function (n) {
             if (!hit && this.get('host').selectionContainsNode(n)) {
                 hits.push(n);
             }
@@ -399,7 +405,7 @@ Y.namespace('M.atto_teamsmeeting').Button = Y.Base.create('button', Y.M.editor_a
      * @return {Node} Node containing the dialogue content
      * @private
      */
-    _getDialogueContent: function() {
+    _getDialogueContent: function () {
         var template = Y.Handlebars.compile(TEMPLATE);
 
         this._content = Y.Node.create(template({
@@ -454,6 +460,10 @@ Y.namespace('M.atto_teamsmeeting').Button = Y.Base.create('button', Y.M.editor_a
          */
         msession: {
             value: null
+        },
+        disabled: {
+            value: null
         }
+
     }
 });
