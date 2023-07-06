@@ -22,7 +22,6 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-
 /**
  * Update plugin.
  *
@@ -36,7 +35,6 @@ function xmldb_atto_teamsmeeting_upgrade($oldversion) {
     $result = true;
 
     if ($oldversion < 2020032700) {
-
         // Define table atto_teamsmeeting to be created.
         $table = new xmldb_table('atto_teamsmeeting');
 
@@ -57,6 +55,18 @@ function xmldb_atto_teamsmeeting_upgrade($oldversion) {
 
         // Teamsmeeting savepoint reached.
         upgrade_plugin_savepoint(true, 2020032700, 'atto', 'teamsmeeting');
+    }
+
+    if ($oldversion < 2020032705) {
+        // Update legacy meetings app URL.
+        $meetingsapplink = get_config('atto_teamsmeeting', 'meetingapplink');
+
+        if ($meetingsapplink && is_string($meetingsapplink) && strtolower($meetingsapplink) == 'https://enovation.ie/msteams') {
+            set_config('meetingapplink', 'https://enomsteams.z16.web.core.windows.net', 'atto_teamsmeeting');
+        }
+
+        // Teamsmeeting savepoint reached.
+        upgrade_plugin_savepoint(true, 2020032705, 'atto', 'teamsmeeting');
     }
 
     return $result;

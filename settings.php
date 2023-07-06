@@ -27,15 +27,18 @@ defined('MOODLE_INTERNAL') || die();
 $ADMIN->add('editoratto', new admin_category('atto_teamsmeeting', new lang_string('pluginname', 'atto_teamsmeeting')));
 
 $settings = new admin_settingpage('atto_teamsmeeting_settings', new lang_string('settings', 'atto_teamsmeeting'));
+
 if ($ADMIN->fulltree) {
     // Meeting application link.
     $name = new lang_string('meetingsapplink', 'atto_teamsmeeting');
     $desc = new lang_string('meetingsapplink_desc', 'atto_teamsmeeting');
-    $default = 'https://enovation.ie/msteams';
+    $olddefault = 'https://enovation.ie/msteams';
+    $default = 'https://enomsteams.z16.web.core.windows.net';
+    $existingconfig = get_config('atto_teamsmeeting', 'meetingapplink');
+    if ($existingconfig == $olddefault) {
+        $desc .= get_string('legacy_setting_warning', 'atto_teamsmeeting');
+    }
 
-    $setting = new admin_setting_configtext('atto_teamsmeeting/meetingapplink',
-                                              $name,
-                                              $desc,
-                                              $default);
+    $setting = new admin_setting_configtext('atto_teamsmeeting/meetingapplink', $name, $desc, $default);
     $settings->add($setting);
 }

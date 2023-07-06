@@ -24,8 +24,8 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version   = 2020032704;        // The current plugin version (Date: YYYYMMDDXX).
+$plugin->version   = 2020032705;        // The current plugin version (Date: YYYYMMDDXX).
 $plugin->requires  = 2016052318;        // Requires this Moodle version.
 $plugin->component = 'atto_teamsmeeting';  // Full name of the plugin (used for diagnostics).
 $plugin->maturity  = MATURITY_STABLE;        // Maturity level of this plugin version
-$plugin->release  = 'v1.2.4';
+$plugin->release  = 'v1.2.5';
