@@ -47,7 +47,7 @@ var COMPONENTNAME = 'atto_teamsmeeting',
                     '<label class="meeting-app-label" for="meetingapp">' +
                     '{{get_string "createteamsmeeting" component}}' +
                     '</label>' +
-                    '<iframe id="meetingapp" src="{{appurl}}?url={{clientdomain}}&locale={{locale}}&msession={{msession}}"></iframe>' +
+                    '<iframe id="meetingapp" src="{{appurl}}?url={{clientdomain}}&locale={{locale}}&msession={{msession}}&editor=atto"></iframe>' +
                 '</div>' +
                 '<div class="mb-1">' +
                     '<label for="{{elementid}}_atto_teamsmeeting_urlentry">{{get_string "meetingurl" component}}</label>' +
