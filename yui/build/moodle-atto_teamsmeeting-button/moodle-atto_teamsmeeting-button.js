@@ -15,9 +15,9 @@ YUI.add('moodle-atto_teamsmeeting-button', function (Y, NAME) {
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
-/*
+/**
  * @package    atto_teamsmeeting
- * @copyright  2020 Enovation
+ * @copyright  2020 Enovation Solutions
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 

@@ -18,7 +18,7 @@
  * Strings for component 'atto_teamsmeeting', language 'en'.
  *
  * @package    atto_teamsmeeting
- * @copyright  2020 Enovation
+ * @copyright  2020 Enovation Solutions
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -32,8 +32,7 @@ $string['meetingoptions'] = 'Meeting Options';
 $string['meetingurl'] = 'Your meeting URL';
 $string['openinnewwindow'] = 'Open in new window';
 $string['pluginname'] = 'Teams Meeting';
-$string['privacy:metadata:msteamsapp'] = 'The Atto Teams Meeting plugin does not store any data. However, it sends user
- language code to Microsoft Teams application to provide user interface based on user language.';
+$string['privacy:metadata:msteamsapp'] = 'The Atto Teams Meeting plugin does not store any data. However, it sends user language code to Microsoft Teams application to provide user interface based on user language.';
 $string['privacy:metadata:msteamsapp:userlang'] = 'User language code sent to Microsoft Teams application.';
 $string['settings'] = 'Teams Meeting Settings';
 $string['legacy_setting_warning'] = '<br/>

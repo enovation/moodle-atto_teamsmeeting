@@ -15,10 +15,10 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Settings for the Teams Meetings application atto plugin.
+ * Settings for the Teams Meeting atto plugin.
  *
  * @package    atto_teamsmeeting
- * @copyright  2020 Enovation
+ * @copyright  2020 Enovation Solutions
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 

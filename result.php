@@ -18,7 +18,7 @@
  * Atto text editor integration result file.
  *
  * @package    atto_teamsmeeting
- * @copyright  2020 Enovation
+ * @copyright  2020 Enovation Solutions
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -31,16 +31,15 @@ $title = optional_param('title', null, PARAM_TEXT);
 $preview = optional_param('preview', null, PARAM_RAW);
 $optionslink = optional_param('options', null, PARAM_RAW);
 
-
 $meetingoptions = null;
 
 if (!empty($preview)) {
     $htmlDom = new DOMDocument;
     @$htmlDom->loadHTML($preview);
     $links = $htmlDom->getElementsByTagName('a');
-    foreach($links as $link){
+    foreach ($links as $link) {
         $href = $link->getAttribute('href');
-        if ($href && strpos($href, 'meetingOptions') !== FALSE) {
+        if ($href && strpos($href, 'meetingOptions') !== false) {
             $meetingoptions = $href;
             break;
         }
@@ -52,7 +51,7 @@ if (!empty($preview)) {
     $meetingdata->options = $meetingoptions;
     $meetingdata->timecreated = time();
     $DB->insert_record('atto_teamsmeeting', $meetingdata);
-} else if(!empty($optionslink)) {
+} else if (!empty($optionslink)) {
     $meetingoptions = $optionslink;
 }
 
@@ -72,22 +71,22 @@ echo '<div style="display: flex; flex-direction: column; margin-top: 2rem;paddin
         0 24 0zm7.9 17.1c-.6 0-1.2.2-1.6.7l-8.5 8.5-3-3c-.4-.4-1-.7-1.6-.7-.3 0-.6.1-.8.2-.3.1-.5.3-.7.5s-.4.4-.5.7c-.2.3-.2.5-.2.8
         0 .6.2 1.2.7 1.6l4.6 4.6c.4.4 1 .7 1.6.7.6 0 1.2-.2 1.6-.7l10.1-10.1c.4-.5.7-1
         .7-1.6 0-.3-.1-.6-.2-.8-.1-.3-.3-.5-.5-.7s-.4-.4-.7-.5c-.4-.2-.7-.2-1-.2z" fill="#599c00"></path></svg>
-        <span class="meetingcreatedheader" style="font-size: 20px; font-weight: 600; display: block; text-align: center;">'.
-            get_string('meetingcreatedsuccess', 'atto_teamsmeeting',  $title).
-       '</span>';
-if(!empty($meetinglink)) {
-    echo '<span class="meetinglink" style="display: block; text-align: center;"><a class="btn btn-primary" href="'.
-        $meetinglink.'" style="display: inline-block; font-weight: 600; text-align: center; vertical-align: middle;
+        <span class="meetingcreatedheader" style="font-size: 20px; font-weight: 600; display: block; text-align: center;">' .
+    get_string('meetingcreatedsuccess', 'atto_teamsmeeting', $title) .
+    '</span>';
+if (!empty($meetinglink)) {
+    echo '<span class="meetinglink" style="display: block; text-align: center;"><a class="btn btn-primary" href="' .
+        $meetinglink . '" style="display: inline-block; font-weight: 600; text-align: center; vertical-align: middle;
         border: 1px solid hsla(0,0%,100%,.04); user-select: none; font-size: .875rem; line-height: 1.5; border-radius: 3px;
-        color: #fff; background-color: #6264a7; margin-top: 1rem; padding: .375rem .75rem; text-decoration: none;" target="_blank">'.
-        get_string('gotomeeting', 'atto_teamsmeeting').'</a></span>';
+        color: #fff; background-color: #6264a7; margin-top: 1rem; padding: .375rem .75rem; text-decoration: none;" target="_blank">' .
+        get_string('gotomeeting', 'atto_teamsmeeting') . '</a></span>';
 }
-if(!empty($meetingoptions)) {
-    echo '<span class="meetingoptions" style="display: block; text-align: center;"><a class="btn btn-primary" href="'.
-        $meetingoptions.'" style="display: inline-block; font-weight: 600; text-align: center; vertical-align: middle;
+if (!empty($meetingoptions)) {
+    echo '<span class="meetingoptions" style="display: block; text-align: center;"><a class="btn btn-primary" href="' .
+        $meetingoptions . '" style="display: inline-block; font-weight: 600; text-align: center; vertical-align: middle;
         border: 1px solid hsla(0,0%,100%,.04); user-select: none; font-size: .875rem; line-height: 1.5; border-radius: 3px;
-        color: #fff; background-color: #6264a7; margin-top: 1rem; padding: .375rem .75rem; text-decoration: none;" target="_blank">'.
-        get_string('meetingoptions', 'atto_teamsmeeting').'</a></span>';
+        color: #fff; background-color: #6264a7; margin-top: 1rem; padding: .375rem .75rem; text-decoration: none;" target="_blank">' .
+        get_string('meetingoptions', 'atto_teamsmeeting') . '</a></span>';
 }
 echo '</div>';
 

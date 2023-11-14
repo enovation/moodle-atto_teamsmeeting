@@ -15,10 +15,10 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Privacy Subsystem implementation for block_activity_modules.
+ * Privacy Subsystem implementation for atto_teamsmeeting.
  *
  * @package    atto_teamsmeeting
- * @copyright  2020 Enovation
+ * @copyright  2020 Enovation Solutions
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 

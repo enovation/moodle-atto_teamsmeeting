@@ -15,17 +15,17 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Atto text editor integration version file.
+ * Plugin version information.
  *
  * @package    atto_teamsmeeting
- * @copyright  2020 Enovation
+ * @copyright  2020 Enovation Solutions
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version   = 2020032705;        // The current plugin version (Date: YYYYMMDDXX).
-$plugin->requires  = 2016052318;        // Requires this Moodle version.
-$plugin->component = 'atto_teamsmeeting';  // Full name of the plugin (used for diagnostics).
-$plugin->maturity  = MATURITY_STABLE;        // Maturity level of this plugin version
-$plugin->release  = 'v1.2.5';
+$plugin->version   = 2020032706;
+$plugin->requires  = 2016052318;
+$plugin->component = 'atto_teamsmeeting';
+$plugin->maturity  = MATURITY_STABLE;
+$plugin->release  = 'v1.2.6';

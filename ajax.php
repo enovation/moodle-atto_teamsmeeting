@@ -15,10 +15,10 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Gets data from DB about the meeting
+ * Gets data from DB about the meeting.
  *
  * @package    atto_teamsmeeting
- * @copyright  2020 Enovation
+ * @copyright  2020 Enovation Solutions
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -26,16 +26,16 @@ define('AJAX_SCRIPT', true);
 
 require_once(__DIR__ . '/../../../../../config.php');
 
-
 require_login();
 
 $url = required_param('url', PARAM_URL);
 $result = '';
 if (!empty($url)) {
-    $record = $DB->get_record_sql('SELECT * FROM {atto_teamsmeeting} WHERE ' . $DB->sql_compare_text('link') . ' = ' . $DB->sql_compare_text(':url'),
-            array('url' => $url), IGNORE_MISSING);
-    $result = json_encode([$CFG->wwwroot.'/lib/editor/atto/plugins/teamsmeeting/result.php', $record->title, $record->link, $record->options]);
+    $record = $DB->get_record_sql('SELECT * FROM {atto_teamsmeeting} WHERE ' . $DB->sql_compare_text('link') . ' = ' .
+        $DB->sql_compare_text(':url'), ['url' => $url]);
+    $result = json_encode([$CFG->wwwroot . '/lib/editor/atto/plugins/teamsmeeting/result.php', $record->title, $record->link,
+        $record->options]);
 }
+
 echo $result;
 die();
-
