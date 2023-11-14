@@ -11,17 +11,17 @@
 ![Screenshot of the settings](docs/settings.png)
 
 ## Usage Guide
-1. When editing description using the Atto Editor type the text which you want to make as meeting link, select it and click on the Microsoft Teams  icon.
+1. When editing description using the Atto Editor type the text which you want to make as meeting link, select it and click on the Microsoft Teams icon.
 
 ![Screenshot of the toolbar](docs/toolbar.png)
 
-2. Then select  Create meeting link  (you will need to sign into your Microsoft Teams account the first time you use it).
+2. Then select Create meeting link (you will need to sign in to your Microsoft Teams account the first time you use it).
 
 ![Screenshot of the sign in page](docs/signin.png)
 
 ![Screenshot of the create meeting page](docs/createmeeting.png)
 
-3. Enter a meeting title, date, and time, then click Create.
+3. Enter a meeting title, date, and time, then click Create.
 
 ![Screenshot of the enter meeting data page](docs/meetingdata.png)
 
@@ -29,7 +29,7 @@
 
 ![Screenshot of the meeting created page](docs/meetingcreated.png)
 
-5. To reach meeting options select the text with the meeting link that you have created before and click on the Microsoft Teams  icon in Atto Editor toolbar.
+5. To reach meeting options select the text with the meeting link that you have created before and click on the Microsoft Teams icon in Atto Editor toolbar.
 
 ![Screenshot of the selected link page](docs/selected.png)
 
@@ -44,13 +44,13 @@ Atto Teams Meeting plugin also enables to use Meetings App locale feature. User 
 
 Atto Teams Meeting plugin itself by default supports only 'en' locale. However, Moodle community is adding more translations for the plugin. [Full list can be found here](https://moodle.org/plugins/translations.php?plugin=atto_teamsmeeting).
 
-You can allways add translations yourself. [More details here](https://docs.moodle.org/dev/Translating_plugins).
+You can always add translations yourself. [More details here](https://docs.moodle.org/dev/Translating_plugins).
 
 ## Hosting Meetings App (optional)
 You can host Microsoft Meetings application yourself. To do this:
 * Download Meetings App code prepared to work with Atto plugin from https://github.com/enovation/msteams-app-lms-meetings
-* Follow instructions in README file to setup application.
-* Change Meetings appllication url in Atto plugin settings to your new URL (<moodle_url>/admin/settings.php?section=atto_teamsmeeting_settings).
+* Follow instructions in README file to set up application.
+* Change Meetings application url in Atto plugin settings to your new URL (<moodle_url>/admin/settings.php?section=atto_teamsmeeting_settings).
 
 
 
