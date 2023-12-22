@@ -34,3 +34,4 @@ $string['openinnewwindow'] = 'Otwórz w nowym oknie';
 $string['pluginname'] = 'Teams Meeting';
 $string['privacy:metadata'] = 'atto_teamsmeeting plugin nie przechowuje żadnych danych osobowych.';
 $string['settings'] = 'Ustawienia Teams Meeting';
+$string['iframe_not_found'] = 'Nie znaleziono spotkania!';

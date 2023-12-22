@@ -37,3 +37,4 @@ $string['privacy:metadata:msteamsapp:userlang'] = 'User language code sent to Mi
 $string['settings'] = 'Teams Meeting Settings';
 $string['legacy_setting_warning'] = '<br/>
 <span style="color:red">WARNING: The Meetings app deployed at https://enovation.ie/msteams is deprecated and will be removed soon. A new app has been created at https://enomsteams.z16.web.core.windows.net.</span>';
+$string['iframe_not_found'] = 'Meeting not found!';
